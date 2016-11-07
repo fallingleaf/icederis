@@ -1,16 +1,15 @@
 import Koa from 'koa'
-import router from './routes'
 import parse from 'co-body'
 import serve from 'koa-static'
+import router from './routes'
 const path = require('path')
 const app = new Koa()
 
 app.use(async (ctx, next) => {
     if (ctx.method == 'POST') {
-        ctx.body = await parse(ctx, { limit: '1kb'})
-        console.log(ctx.body)
+        ctx.form = await parse(ctx, { limit: '1kb'})
     }
-    return await next()
+    await next()
 })
 
 app.use(async (ctx, next) => {
@@ -20,9 +19,10 @@ app.use(async (ctx, next) => {
     console.log(`request: ${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
-app.use(serve(path.resolve(__dirname, './static')))
+app.use(serve(path.resolve('./static')))
 app.use(router.routes())
 app.use(router.allowedMethods())
+
 
 app.listen(8000)
 

@@ -1,31 +1,30 @@
 
+export function responseSuccess(ctx, data = {}) {
+    ctx.body = {
+        success: true,
+        data: data
+    }
+    ctx.status = 200
+}
+
+export function responseError(ctx, msg = '', code = 400) {
+    ctx.body = {
+        success: false,
+        msg,
+    }
+    ctx.status = code
+}
+
 class View {
 
     constructor(model) {
         this.model = model
     }
 
-    returnSuccess(ctx, data = {}) {
-        ctx.body = {
-            success: true,
-            data: data
-        }
-        ctx.status = 200
-    }
-
-    returnError(ctx, msg = '', code = 400) {
-        ctx.body = {
-            success: false,
-            msg,
-            code
-        }
-        ctx.status = code
-    }
-
     list() {
         return async (ctx, next) => {
             let objs = await this.model.fetchAll()
-            this.returnSuccess(ctx, objs)
+            return responseSuccess(ctx, objs)
         }
     }
 
@@ -34,21 +33,26 @@ class View {
             let params = ctx.params
             console.log(params)
             let obj = await this.model.where({id: params.pk}).fetch()
-            this.returnSuccess(ctx, obj)
+            if(obj == null) {
+                return responseError(ctx, 'Object not found', 404)
+            }
+            else {
+                return responseSuccess(ctx, obj)
+            }
         }
     }
 
     create() {
         return async (ctx, next) => {
             console.log(ctx.body)
-            this.returnSuccess(ctx, [])
+            return responseSuccess(ctx, [])
         }
 
     }
 
     remove() {
         return async (ctx, next) => {
-            this.returnSuccess(ctx, [])
+            return responseSuccess(ctx, [])
         }
     }
 

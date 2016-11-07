@@ -1,4 +1,5 @@
 import { AUTH_REQUEST, AUTH_RESPONSE, AUTH_LOGOUT } from 'config/actionTypes'
+const $ = require('jquery')
 
 function loginRequest(email, password) {
     return {
@@ -34,6 +35,9 @@ export function login(email, password, redirect = '/') {
     return (dispatch) => {
         dispatch(loginRequest(email, password))
         console.log('Request login simulation')
+        $.post('/login', {email, password}, function(result) {
+            console.log(result)
+        })
         setTimeout(500, dispatch(loginResponse(MOCKUSER, {})))
     }
 }

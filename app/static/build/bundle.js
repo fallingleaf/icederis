@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "5c9130c3bcdad5ba8780"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "968c2090bfd0a3cb0f8a"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -570,7 +570,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/static/js/";
+/******/ 	__webpack_require__.p = "/static/";
 /******/
 /******/ 	// __webpack_hash__
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
@@ -37759,7 +37759,7 @@
 	    };
 	}
 	
-	//require('form.scss')
+	__webpack_require__(509);
 	
 	var Login = _wrapComponent('Login')(function (_React$Component) {
 	    (0, _inherits3.default)(Login, _React$Component);
@@ -37836,6 +37836,8 @@
 	
 	var _actionTypes = __webpack_require__(308);
 	
+	var $ = __webpack_require__(508);
+	
 	function loginRequest(email, password) {
 	    return {
 	        type: _actionTypes.AUTH_REQUEST,
@@ -37872,6 +37874,9 @@
 	    return function (dispatch) {
 	        dispatch(loginRequest(email, password));
 	        console.log('Request login simulation');
+	        $.post('/login', { email: email, password: password }, function (result) {
+	            console.log(result);
+	        });
 	        setTimeout(500, dispatch(loginResponse(MOCKUSER, {})));
 	    };
 	}
@@ -37882,6 +37887,18 @@
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(309); if (makeExportsHot(module, __webpack_require__(82))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "auth.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)(module)))
+
+/***/ },
+/* 508 */
+/***/ function(module, exports) {
+
+	module.exports = jQuery;
+
+/***/ },
+/* 509 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ]);

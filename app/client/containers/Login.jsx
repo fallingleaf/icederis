@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { login } from 'actions/auth'
-//require('form.scss')
+require('style.scss')
 
 class Login extends React.Component {
     constructor(props, context) {
@@ -24,9 +24,9 @@ class Login extends React.Component {
             <div className="form">
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <div className="form-group">
-                        <input type="text" ref={(node) => this._username = node } />
-                        <input type="password" ref={(node) => this._password = node} />
-                        <input type="submit" value="Login"/>
+                        <input type="text" ref={(node) => this._username = node } className="form-control"/>
+                        <input type="password" ref={(node) => this._password = node} className="form-control"/>
+                        <input type="submit" value="Login" className="btn btn-primary"/>
                     </div>
                 </form>
             </div>
